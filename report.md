@@ -44,7 +44,7 @@
 				ctx_render.stroke();
 			} 
 		```
-		![](/Users/guzhicheng/Desktop/pic.png)
+		![](./pic.png)
 	* ### Controlling the size of grid
 		* The user can use the bars provided to control the width of the canvas and the height of the canvas respectively. To resize the canvas, the user has to restart the game.
 	* ### Drawing the cells
@@ -69,26 +69,105 @@
 * ##Unit Test
 	* ### Test the grid
 		* To test the cellGrid and lastCellGrid, the central part is the function ** cellGridInit ** . By using mocha, we can ensure that cellGridInit is a function and have 2 arguments. And the function gurantees to generate a cellGrid and a lastCellGrid corresponding to the input.
+		
+		```
+			Procedure:
+			call cellGridInit(2,2)
+			use assert.equal(Width(Height), 2) to test the grid size
+			Result:
+			cellGrid.length == 2
+			cellGrid[0].length == 2(example guarantees that cellGrid[0] can be accessed)
+			no alert, test passed!
+		```
+				
 		* In addition, `lastCellGrid` is tested to gurantee that its size is equal to the `cellGrid` and it can record the previous value of cellGrid.
+		
+		```
+			Procedure:
+			use assert.equal(lastCellGrid[i][j], cellGrid[i][j]) to compare each value stored in cellGrid and lastCellGrid 
+			Result:
+			no alert, test passed, lastCellGrid == cellGrid
+		```
+		
 	* ### Test the functions
 	In this section, we test a series of functions that are called in the program.
 		* ** gameInit ** :
 		Because most of the code in function is to create the elements in the HTML and cellGridInit has been tested in the previous part, so I just ensure that it is a function and has no argument.
+		
+		```
+			Procedure:
+			assert.isFunction(gameInit)
+			assert.equal(gameInit.length,0)
+			Result:
+			no alert, test passed
+		```
+		
 		* ** restart ** :
 		This function clears all the elements of the HTML and then call gameInit, so the only thing to test is ensuring that it is function and has no argument.
+		
+		```
+			Procedure:
+			manually check whether the elements are displayed properly
+			assert.isFunction(restart)
+			assert.equal(restart.length,0)
+			Result:
+			no alert, test passed
+		```
 		
 	* ### Test the gameEngine
 	`gameEngine` is a critical Object in the program and we should carefully test its member methods
 		* ** renderAll ** :
 			Most of the code deals with the HTML elements and we just test `isFunction` and `no argument`
+			
+		```
+			Procedure:
+			assert.isFunction(gameInit)
+			assert.equal(gameInit.length,0)
+			Result:
+			no alert, test passed
+		```
+			
 		* ** determineStateForBlock **  
 		To test the correctness of the function, we use a 3 plus 3 cellGrid. First, we call `cellGridInit` and then set the cellGrid to a certain matrix. Then we call ** determineStateForBlock ** for each value in cellGrid. Finally, we check if the new value of cellGrid is the same as that we expect(`expectGrid`).
+		
+		```
+			Procedure:
+			assert.isFunction(gameEngine.determineStateForBlock)
+			assert.equal(gameEngine.determineStateForBlock.length,2)
+			give example grid and expectGrid:
+			cellGrid = [[1,1,0],[0,1,0],[0,0,1]];
+			expectGrid = [[1,1,0],[0,1,0],[0,0,1]];
+			call determineStateForBlock for every cell in cellGrid
+			Result:
+			no alert, test passed, expectedGrid == cellGrid(after calling determineStateForBlock)
+		```
+		
+		
 		* **run ** :
 		The test program checks whether the `gameEngine.interval` is equal to zero to ensure its correctness.
+		
+		```
+			Procedure:
+			assert.isFunction(gameEngine.run)
+			assert.equal(gameEngine.run.length,0)
+			ensure that there is no existing interval before running
+			ensure that there exist interval after running
+			Result:
+			no alert, test passed
+		```
+		
 		* ** stop ** and ** tick ** : guarantee that they are functions and have no argument.
-
+		
+		```
+			Procedure:
+			assert.isFunction(gameEngine.stop(gameEngine.tick))
+			assert.equal(gameEngine.stop.length(gameEngine.tick.length),0(1))
+			Result:
+			no alert, test passed
+		```
+		
 * ## Conclusion:
 	Writing such program enhances my knowledge about js as well as my understanding on Software Engineering.
- 		
+	The program has been released at <a href="https://jimmygoo.github.io/SoftwareEngineer3">https://jimmygoo.github.io/SoftwareEngineer3</a>
 		
 		 
